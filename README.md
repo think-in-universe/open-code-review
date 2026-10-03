@@ -131,6 +131,8 @@ ocr config model             # Pick a model for the active provider
 
 ![Provider setup](imgs/providers.jpg)
 
+For privacy-sensitive code review, select **NEAR AI Cloud** (`near-ai`) to use its TEE-hosted model presets. Code and review context can contain proprietary information; see the [NEAR AI setup and privacy boundaries](https://open-codereview.ai/docs/configuration/#near-ai-cloud-and-code-privacy), including model selection and OCR's current lack of attestation verification.
+
 The interactive UI guides you through provider selection, API key entry, and model configuration, then automatically tests connectivity.
 
 For CLI setup, environment variables, custom providers, and other advanced configuration, see [Configuration](https://open-codereview.ai/docs/configuration).

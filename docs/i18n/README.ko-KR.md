@@ -131,6 +131,8 @@ ocr config model             # 활성 provider의 model 선택
 
 ![Provider setup](../../imgs/providers.jpg)
 
+개인정보 보호가 중요한 코드 리뷰에는 **NEAR AI Cloud**(`near-ai`)의 TEE 호스팅 모델 프리셋을 선택할 수 있습니다. 코드와 리뷰 맥락에는 기밀 정보가 포함될 수 있습니다. 모델 선택과 OCR이 현재 증명을 검증하지 않는다는 제한은 [NEAR AI 설정 및 개인정보 보호 범위](https://open-codereview.ai/docs/configuration/#near-ai-cloud-and-code-privacy)를 참고하세요.
+
 대화형 UI가 provider 선택, API key 입력, model 설정을 안내하며, 완료 후 자동으로 연결 테스트를 수행합니다.
 
 CLI 설정, 환경 변수, 커스텀 provider 등 고급 설정은 [설정 가이드](https://open-codereview.ai/docs/configuration)를 참조하세요.

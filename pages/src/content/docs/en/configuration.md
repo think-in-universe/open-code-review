@@ -49,6 +49,7 @@ environment variable.
 | `openai` | openai | `https://api.openai.com/v1` | `OPENAI_API_KEY` |
 | `openai-responses` | openai-responses | `https://api.openai.com/v1` | `OPENAI_RESPONSES_API_KEY` |
 | `openrouter` | openai | `https://openrouter.ai/api/v1` | `OPENROUTER_API_KEY` |
+| `near-ai` | openai | `https://cloud-api.near.ai/v1` | `NEAR_AI_API_KEY` |
 | `gemini` | openai | `https://generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 | `dashscope` | openai | `https://dashscope.aliyuncs.com/compatible-mode/v1` | `DASHSCOPE_API_KEY` |
 | `dashscope-tokenplan` | openai | `https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1` | `DASHSCOPE_TOKENPLAN_KEY` |
@@ -68,6 +69,41 @@ environment variable.
 | `siliconflow-cn`  | openai | `https://api.siliconflow.cn/v1` | `SILICONFLOW_API_KEY` |
 | `novita` | openai | `https://api.novita.ai/openai` | `NOVITA_API_KEY` |
 | `xai` | openai | `https://api.x.ai/v1` | `XAI_API_KEY` |
+
+### NEAR AI Cloud and code privacy
+
+Code review sends source code, diffs, and surrounding context to the selected
+provider. This can expose proprietary logic and security-sensitive details, so
+inference privacy matters as much as model capability.
+
+[NEAR AI Cloud](https://docs.near.ai/cloud/private-inference) offers inference
+inside Trusted Execution Environments (TEEs), designed to isolate prompts and
+outputs from infrastructure operators. OCR's `near-ai` suggestions include only
+NEAR-hosted TEE models advertised with tool-calling support in the
+[model catalog](https://cloud-api.near.ai/v1/model/list).
+
+Create an API key in the [NEAR AI dashboard](https://cloud.near.ai/), then configure:
+
+```bash
+export NEAR_AI_API_KEY="your-api-key"
+ocr config set provider near-ai
+ocr config set model z-ai/glm-5.3-flash
+ocr llm test
+```
+
+You can also store the key as `providers.near-ai.api_key`, or use
+`providers.near-ai.api_key_cmd` with a secret manager. The default endpoint is
+`https://cloud-api.near.ai/v1`, using OpenAI-compatible Chat Completions.
+
+Model choice matters: the gateway also proxies third-party models, and its
+[TEE guarantees do not extend to those upstream providers](https://docs.near.ai/cloud/models).
+The suggestions are a catalog snapshot, not an enforced privacy policy; confirm
+the current model's hosting and capabilities before sending sensitive code.
+OCR uses ordinary HTTPS and does not currently verify NEAR AI attestations or
+response signatures, or implement its application-level encrypted completions.
+See NEAR AI's [verification guide](https://docs.near.ai/cloud/verification) for
+those additional checks. Provider-side protections also do not protect code or
+review artifacts stored locally by OCR.
 
 ### Overriding a built-in provider's Base URL
 

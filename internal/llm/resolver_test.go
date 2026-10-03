@@ -2773,3 +2773,34 @@ func TestResolveEndpoint_InvalidEnvURLNamesSourceAndVariable(t *testing.T) {
 		})
 	}
 }
+
+func TestResolveEndpoint_NEARAI(t *testing.T) {
+	for _, tc := range []struct {
+		name, key, model, wantKey, wantModel string
+	}{
+		{"environment key and top-level model", "", "", "near-env-key", "z-ai/glm-5.3-flash"},
+		{"configured key and model", "near-config-key", "Qwen/Qwen3.8-27B", "near-config-key", "Qwen/Qwen3.8-27B"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			clearAllEnv(t)
+			t.Setenv("NEAR_AI_API_KEY", "near-env-key")
+			path, _ := writeResolverConfig(t, configFile{
+				Provider: "near-ai",
+				Model:    "z-ai/glm-5.3-flash",
+				Providers: map[string]providerEntryConfig{
+					"near-ai": {APIKey: tc.key, Model: tc.model},
+				},
+			})
+			ep, err := ResolveEndpoint(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if ep.URL != "https://cloud-api.near.ai/v1" || ep.Protocol != ProtocolOpenAIChatCompletions {
+				t.Fatalf("unexpected endpoint: %+v", ep)
+			}
+			if ep.Token != tc.wantKey || ep.Model != tc.wantModel || ep.Source != "provider:near-ai" {
+				t.Fatalf("unexpected resolution: %+v", ep)
+			}
+		})
+	}
+}

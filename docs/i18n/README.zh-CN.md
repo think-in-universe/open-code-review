@@ -131,6 +131,8 @@ ocr config model             # 为当前供应商选择模型
 
 ![Provider setup](../../imgs/providers.jpg)
 
+对于隐私敏感的代码审查，可选择 **NEAR AI Cloud**（`near-ai`）及其 TEE 托管模型预设。代码和审查上下文可能包含专有信息；请参阅 [NEAR AI 配置与隐私边界](https://open-codereview.ai/docs/configuration/#near-ai-cloud-and-code-privacy)，了解模型选择及 OCR 目前尚不验证远程证明的限制。
+
 交互式界面会引导你完成供应商选择、API Key 输入和模型配置，完成后自动测试连通性。
 
 命令行设置、环境变量、自定义供应商等高级配置，详见[配置指南](https://open-codereview.ai/docs/configuration)。

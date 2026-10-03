@@ -131,6 +131,8 @@ ocr config model             # アクティブなプロバイダーのモデル�
 
 ![Provider setup](../../imgs/providers.jpg)
 
+プライバシーが重要なコードレビューでは、**NEAR AI Cloud**（`near-ai`）の TEE 内でホストされるモデルプリセットを選択できます。コードやレビューのコンテキストには機密情報が含まれる可能性があります。[NEAR AI の設定とプライバシーの適用範囲](https://open-codereview.ai/docs/configuration/#near-ai-cloud-and-code-privacy)で、モデルの選択と、OCR が現在アテステーションを検証しない点を確認してください。
+
 対話的UIがプロバイダーの選択、APIキーの入力、モデル設定をガイドし、完了後に自動的に接続テストを行います。
 
 CLIセットアップ、環境変数、カスタムプロバイダーなどの高度な設定については、[設定ガイド](https://open-codereview.ai/docs/configuration)を参照してください。

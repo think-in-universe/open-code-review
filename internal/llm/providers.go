@@ -123,6 +123,20 @@ var registry = []Provider{
 		},
 	},
 	{
+		Name:        "near-ai",
+		DisplayName: "NEAR AI Cloud",
+		Protocol:    ProtocolOpenAIChatCompletions,
+		BaseURL:     "https://cloud-api.near.ai/v1",
+		EnvVar:      "NEAR_AI_API_KEY",
+		// Suggest only NEAR-hosted TEE models with tool calling; the gateway
+		// also offers external models with different privacy guarantees.
+		Models: []string{
+			"z-ai/glm-5.3-flash",
+			"Qwen/Qwen3.8-27B",
+			"Qwen/Qwen3.6-35B-A3B-FP8",
+		},
+	},
+	{
 		Name:        "edenai",
 		DisplayName: "Eden AI",
 		Protocol:    ProtocolOpenAIChatCompletions,
